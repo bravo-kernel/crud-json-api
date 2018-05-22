@@ -269,14 +269,14 @@ class JsonApiListener extends ApiListener
                 $nestedContains = $this->_parseIncludes($nestedIncludes, $blacklist, $whitelist, $association ? $association->getTarget() : null, $includePath);
             }
 
+            if (empty($association)) {
+                continue;
+            }
+
             if (!empty($nestedContains)) {
-                if (!empty($association)) {
-                    $contains[$association->getAlias()] = $nestedContains;
-                }
+                $contains[$association->getAlias()] = $nestedContains;
             } else {
-                if (!empty($association)) {
-                    $contains[] = $association->getAlias();
-                }
+                $contains[] = $association->getAlias();
             }
         }
 
